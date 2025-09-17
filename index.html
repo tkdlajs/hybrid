@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>정원중 - 포트폴리오</title>
+    <title>동의과학대학교 - 미래를 향한 도약</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -11,179 +14,764 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(37, 99, 235, 0.8), rgba(30, 64, 175, 0.8)), url('images/campus-main.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: #d97706;
+        }
+
+        /* Floating Elements */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            width: 100px;
+            height: 100px;
+            animation-delay: 4s;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 5rem 0;
+            background: var(--bg-light);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
         }
 
-        /* Navigation - 햄버거 메뉴 */
-        nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        /* 햄버거 메뉴 항상 표시 */
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 1001;
-            transition: transform 0.3s ease;
-        }
-
-        .hamburger:hover {
-            transform: scale(1.1);
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #333;
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        /* 햄버거 애니메이션 */
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-
-        /* 네비게이션 메뉴 - 사이드 슬라이드 방식 */
-        .nav-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            list-style: none;
-            gap: 3rem;
-            transition: right 0.4s ease;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-menu.active {
-            right: 0;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            font-size: 1.2rem;
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
             transition: all 0.3s ease;
-            cursor: pointer;
-            padding: 1rem 2rem;
-            border-radius: 10px;
             position: relative;
             overflow: hidden;
         }
 
-        .nav-link:before {
+        .stat-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            transition: left 0.3s ease;
-            z-index: -1;
+            height: 4px;
+            background: var(--gradient-primary);
+            transition: left 0.5s ease;
         }
 
-        .nav-link:hover:before,
-        .nav-link.active:before {
+        .stat-card:hover::before {
             left: 0;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: white;
-            transform: translateX(10px);
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
 
-        /* 오버레이 */
-        .nav-overlay {
-            position: fixed;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            background: url('images/about-image.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        }
+
+        .about-image p {
+            position: relative;
+            z-index: 2;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        /* Timeline Styles */
+        .timeline-section {
+            margin-top: 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .timeline-year {
+            flex: 0 0 100px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 1.5rem;
+            margin: 0 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Campus Life Section */
+        .campus-life {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .life-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .life-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .life-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transition: left 0.5s ease;
+        }
+
+        .life-card:hover::before {
+            left: 0;
+        }
+
+        .life-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .life-icon {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .life-content {
+            flex: 1;
+        }
+
+        .life-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .life-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Facilities Section */
+        .facilities {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-description {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .facilities-main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .facility-highlight {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 20px;
             transition: all 0.3s ease;
         }
 
-        .nav-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .facility-highlight:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
 
-        /* Page Sections */
-        .page {
-            display: none;
-            padding: 120px 0 60px;
-            min-height: 100vh;
+        .facility-highlight .facility-image {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
         }
 
-        .page.active {
-            display: block;
+        .facility-highlight .facility-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
 
-        .page-content {
-            background: rgba(255, 255, 255, 0.95);
+        .facility-highlight .facility-content p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .facility-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .facility-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .facility-item:hover::before {
+            opacity: 0.1;
+        }
+
+        .facility-item:hover {
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        .facility-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .facility-item:hover .facility-icon {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .facility-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 0.5rem;
+        }
+
+        .facility-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            position: relative;
+            z-index: 2;
+        }
+
+        .facility-item:hover .facility-desc {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .admission-process {
+            margin: 3rem 0;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+            color: white;
+        }
+
+        .step-item h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .step-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item small {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+        }
+
+        .scholarships {
+            margin-top: 4rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .scholarship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .scholarship-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .scholarship-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .scholarship-item i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .scholarship-item h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .scholarship-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -195,585 +783,658 @@
             }
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-            text-align: center;
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
         }
 
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 0.5rem;
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
 
-        h3 {
-            font-size: 1.3rem;
-            margin: 1.5rem 0 1rem;
-            color: #555;
-        }
-
-        .intro-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-            margin: 2rem 0;
-        }
-
-        .profile-img {
-            width: 100%;
-            max-width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            margin: 0 auto;
-            display: block;
-        }
-
-        .intro-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .skill-item {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Media Elements */
-        .media-container {
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        video, audio {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        audio {
-            margin: 1rem 0;
-        }
-
-        /* Project Cards */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-            border-color: #667eea;
-        }
-
-        .project-card h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .tech-tag {
-            background: #667eea;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        /* Reports Table */
-        .reports-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .reports-table th,
-        .reports-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        .reports-table th {
-            background: #667eea;
-            color: white;
-            font-weight: 600;
-        }
-
-        .reports-table tr:hover {
-            background: #f8f9ff;
-        }
-
-        .download-btn {
-            background: #667eea;
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.3s ease;
-        }
-
-        .download-btn:hover {
-            background: #5a67d8;
-        }
-
-        /* Portfolio Gallery */
-        .portfolio-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .portfolio-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .portfolio-item:hover {
-            transform: scale(1.05);
-        }
-
-        .portfolio-img {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
+        .fade-in.visible {
+            opacity: 1;
             transform: translateY(0);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
-                width: 100%;
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .nav-container {
-                padding: 1rem;
+                padding: 0 1rem;
             }
 
-            .intro-grid {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .facilities-main {
                 grid-template-columns: 1fr;
+            }
+            
+            .facility-highlight {
+                flex-direction: column;
                 text-align: center;
             }
-
-            h1 {
-                font-size: 2rem;
+            
+            .timeline::before {
+                left: 20px;
             }
-
-            h2 {
-                font-size: 1.5rem;
+            
+            .timeline-item {
+                flex-direction: row;
+                text-align: left;
+                padding-left: 60px;
             }
-
-            .page-content {
-                padding: 2rem 1rem;
-                margin: 0 1rem 2rem;
+            
+            .timeline-item:nth-child(odd) {
+                flex-direction: row;
+                text-align: left;
             }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
+            
+            .timeline-year {
+                position: absolute;
+                left: 0;
+                flex: none;
+                width: 60px;
             }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
+            
+            .timeline-content {
+                margin: 0;
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .scholarship-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 480px) {
-            .page {
-                padding: 100px 0 40px;
+            .hero-title {
+                font-size: 2rem;
             }
 
-            .page-content {
-                padding: 1.5rem;
-                margin: 0 0.5rem 1rem;
+            .section-title {
+                font-size: 2rem;
             }
 
-            h1 {
-                font-size: 1.8rem;
+            .stats-grid,
+            .life-grid,
+            .facility-grid {
+                grid-template-columns: 1fr;
             }
+            
+            .process-steps,
+            .scholarship-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                padding-left: 80px;
+            }
+            
+            .timeline-year {
+                width: 80px;
+            }
+        }
 
-            .nav-menu {
-                width: 100%;
-                gap: 2rem;
-            }
+        /* Theme Toggle & Scroll Button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
 
-            .nav-link {
-                font-size: 1.1rem;
-            }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(100px);
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1) translateY(0);
+            background: #d97706;
         }
     </style>
 </head>
 <body>
-    <!-- 네비게이션 오버레이 -->
-    <div class="nav-overlay"></div>
-    
-    <nav>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">정원중</div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="logo">
+                <img src="images/logo.png" alt="동의과학대학교">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">홈</a></li>
+                <li><a href="#about" class="nav-link">대학소개</a></li>
+                <li><a href="#campus-life" class="nav-link">캠퍼스라이프</a></li>
+                <li><a href="#facilities" class="nav-link">시설안내</a></li>
+                <li><a href="#contact" class="nav-link">입학정보</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
             </div>
         </div>
-        
-        <!-- 햄버거 메뉴 -->
-        <ul class="nav-menu">
-            <li><a href="#" class="nav-link active" data-page="intro">소개</a></li>
-            <li><a href="#" class="nav-link" data-page="reports">레포트</a></li>
-            <li><a href="#" class="nav-link" data-page="projects">프로젝트</a></li>
-            <li><a href="#" class="nav-link" data-page="portfolio">포트폴리오</a></li>
-        </ul>
     </nav>
 
-    <div class="container">
-        <!-- 소개 페이지 -->
-        <section id="intro" class="page active">
-            <div class="page-content">
-                <h1>안녕하세요, 정원중입니다</h1>
-                
-                <div class="intro-grid">
-                    <div>
-                        <svg class="profile-img" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="100" cy="100" r="90" fill="url(#grad1)"/>
-                            <circle cx="100" cy="80" r="30" fill="white" opacity="0.9"/>
-                            <ellipse cx="100" cy="140" rx="45" ry="25" fill="white" opacity="0.9"/>
-                        </svg>
-                    </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">동의과학대학교</h1>
+            <p class="hero-subtitle">창의적 전문기술인 양성의 요람 - Think Creative, Act Professional</p>
+            <a href="#about" class="cta-button">대학 알아보기</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title fade-in">숫자로 보는 동의과학대학교</h2>
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-number" data-target="12000">0</div>
+                    <div class="stat-label">재학생 수</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number" data-target="92">0</div>
+                    <div class="stat-label">취업률 (%)</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">설립 년수</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number" data-target="39">0</div>
+                    <div class="stat-label">전공 분야</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">대학 소개</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>석당 김임식 박사의 교육이념</h3>
+                    <p>동의과학대학교는 1972년 석당(碩堂) 김임식 박사에 의해 설립된 동의전문학교를 시초로, 1974년 3월 개교한 이래 50년간 대한민국 전문기술인력 양성의 중심 역할을 해왔습니다.</p>
+                    <p>부산 지역을 대표하는 전문대학으로서 5개 계열 39개 학과를 운영하며, 산업체 맞춤형 실무교육과 최첨단 실습환경을 통해 창의적이고 실무능력을 갖춘 전문인재를 양성하고 있습니다.</p>
+                    <p>LINC 3.0 선도전문대학, 지방전문대학 혁신지원사업 등 정부 재정지원사업을 통해 4차 산업혁명 시대에 부응하는 스마트 교육환경을 구축하고, 산학협력을 통해 학생들의 성공적인 사회진출과 지역사회 발전에 기여하고 있습니다.</p>
                     
-                    <div class="intro-text">
-                        <p>이번 과제에서는 <b>러버블 AI</b>를 활용하여 자기소개 앱을 제작했습니다.</p>
-                        <p>AI를 활용하면서 코드 작성이 훨씬 쉬워졌고, 디자인 아이디어도 참고할 수 있었습니다.</p>
-                        <p>또한 오디오와 비디오 삽입 방법, HTML 기본 구조를 학습하면서 웹 개발의 기초를 익혔습니다.</p>
-                        <p>이 경험을 통해 앞으로 더 복잡한 프로젝트에도 도전할 수 있을 것 같습니다.</p>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-light); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                        <h4 style="color: var(--primary-color); margin-bottom: 1rem;">교육 목표</h4>
+                        <ul style="color: var(--text-light); line-height: 1.8; padding-left: 1rem;">
+                            <li>창의적 사고력을 지닌 전문기술인 양성</li>
+                            <li>실무능력과 현장적응력을 갖춘 인재 육성</li>
+                            <li>올바른 인성과 봉사정신을 실천하는 직업인 양성</li>
+                            <li>지역사회와 국가발전에 기여하는 글로벌 인재 양성</li>
+                        </ul>
                     </div>
                 </div>
-
-                <h2>기술 스택</h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <h4>Frontend</h4>
-                        <p>React, Node.js, HTML5, CSS3</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Backend</h4>
-                        <p>Node.js, Python, Java</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Database</h4>
-                        <p>HeidiSQL, MariaDB</p>
-                    </div>
-                </div>
-
-                <div class="media-container">
-                    <h3>자기소개 오디오</h3>
-                    <audio controls>
-                        <source src="https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3" type="audio/mpeg">
-                        브라우저가 오디오를 지원하지 않습니다.
-                    </audio>
-                    
-                    <h3>소개 비디오</h3>
-                    <video controls poster="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                        브라우저가 비디오를 지원하지 않습니다.
-                    </video>
+                <div class="about-image fade-in">
+                    <p>황령산 자락의 아름다운 캠퍼스</p>
                 </div>
             </div>
-        </section>
+            
+            <!-- Timeline Section -->
+            <div class="timeline-section">
+                <h3 class="section-subtitle fade-in">연혁</h3>
+                <div class="timeline">
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">1972</div>
+                        <div class="timeline-content">
+                            <h4>동의전문학교 설립</h4>
+                            <p>석당 김임식 박사에 의해 학교법인 동의학원 설립</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">1974</div>
+                        <div class="timeline-content">
+                            <h4>개교</h4>
+                            <p>동의전문학교 개교 (4개 학과)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">1979</div>
+                        <div class="timeline-content">
+                            <h4>전문대학 승격</h4>
+                            <p>동의공업전문대학으로 승격</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">2005</div>
+                        <div class="timeline-content">
+                            <h4>동의과학대학</h4>
+                            <p>교명 변경으로 종합적 전문대학으로 발전</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-year">2011</div>
+                        <div class="timeline-content">
+                            <h4>동의과학대학교</h4>
+                            <p>현재의 교명으로 변경, 대학원 과정 개설</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- 레포트 페이지 -->
-        <section id="reports" class="page">
-            <div class="page-content">
-                <h1>연구 레포트</h1>
+    <!-- Campus Life Section -->
+    <section class="campus-life" id="campus-life">
+        <div class="container">
+            <h2 class="section-title fade-in">캠퍼스 라이프</h2>
+            <div class="life-grid">
+                <div class="life-card fade-in">
+                    <div class="life-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="life-content">
+                        <h3 class="life-title">NCS 기반 교육과정</h3>
+                        <p class="life-desc">국가직무능력표준(NCS) 기반의 체계적인 교육과정과 개인별 맞춤형 학습 지원을 통해 실무능력을 향상시킵니다.</p>
+                    </div>
+                </div>
+                <div class="life-card fade-in">
+                    <div class="life-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="life-content">
+                        <h3 class="life-title">다양한 동아리</h3>
+                        <p class="life-desc">60여 개의 동아리와 학술 동호회를 통해 전공 역량을 강화하고 리더십을 기를 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="life-card fade-in">
+                    <div class="life-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="life-content">
+                        <h3 class="life-title">취업 역량 강화</h3>
+                        <p class="life-desc">취업지원센터 운영과 산업체 연계 현장실습을 통해 높은 취업률과 우수한 취업의 질을 실현하고 있습니다.</p>
+                    </div>
+                </div>
+                <div class="life-card fade-in">
+                    <div class="life-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="life-content">
+                        <h3 class="life-title">장학 혜택</h3>
+                        <p class="life-desc">성적우수, 가계곤란, 특기자 장학금 등 다양한 장학제도로 학생들의 경제적 부담을 덜어드립니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="facilities" id="facilities">
+        <div class="container">
+            <h2 class="section-title fade-in">시설 안내</h2>
+            <p class="section-description fade-in">최첨단 교육시설과 편안한 학습환경을 제공합니다</p>
+            
+            <!-- Main Facilities -->
+            <div class="facilities-main">
+                <div class="facility-highlight fade-in">
+                    <div class="facility-image">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <div class="facility-content">
+                        <h3>DIT 스포츠센터</h3>
+                        <p>부산진구 온천 1호로 등록된 천연온천을 활용한 수영장, 헬스장, 골프연습장, 부산 지역 최초의 스킨스쿠버 교육장 등 종합 레포츠 시설을 갖추고 있습니다. 재학생 30%, 졸업생 10% 할인 혜택을 제공합니다.</p>
+                    </div>
+                </div>
                 
-                <table class="reports-table">
-                    <thead>
-                        <tr>
-                            <th>제목</th>
-                            <th>날짜</th>
-                            <th>카테고리</th>
-                            <th>다운로드</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>React 18 신기능 분석 보고서</td>
-                            <td>2024-03-15</td>
-                            <td>Frontend</td>
-                            <td><button class="download-btn" onclick="downloadReport('react18')">PDF</button></td>
-                        </tr>
-                        <tr>
-                            <td>마이크로서비스 아키텍처 연구</td>
-                            <td>2024-02-28</td>
-                            <td>Backend</td>
-                            <td><button class="download-btn" onclick="downloadReport('microservice')">PDF</button></td>
-                        </tr>
-                        <tr>
-                            <td>웹 성능 최적화 기법</td>
-                            <td>2024-02-10</td>
-                            <td>Performance</td>
-                            <td><button class="download-btn" onclick="downloadReport('performance')">PDF</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- 프로젝트 페이지 -->
-        <section id="projects" class="page">
-            <div class="page-content">
-                <h1>주요 프로젝트</h1>
-                
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>중고 도서 거래 플랫폼</h3>
-                        <p>중고 도서 거래 웹사이트를 팀프로젝트로 제작했습니다. 도서 판매자의 거래 후기를 조회하거나 게시판에서 회원들과 소통을 하는 등 여러 기능이 있습니다.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Eclipse</span>
-                            <span class="tech-tag">HeidiSQL</span>
-                            <span class="tech-tag">Visual Studio</span>
-                        </div>
-                        <p><strong>기간:</strong> 4개월 (2025.03 - 2025.6)</p>
-                        <p><strong>역할:</strong> 프론트엔드</p>
+                <div class="facility-highlight fade-in">
+                    <div class="facility-image">
+                        <i class="fas fa-mountain"></i>
                     </div>
-
-                    <div class="project-card">
-                        <h3>분리배출 도움 애플리케이션</h3>
-                        <p>안드로이드 스튜디오로 제작한 분리배출 도움 앱입니다. 재활용, 분리배출에 관한 정보와 Google Maps와 연동하여 주변 재활용 센터를 조회할 수 있습니다.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Android Studio</span>
-                        </div>
-                        <p><strong>기간:</strong> 2개월 (2025.05 - 2025.06)</p>
-                        <p><strong>역할:</strong> 1인</p>
+                    <div class="facility-content">
+                        <h3>자연친화적 캠퍼스</h3>
+                        <p>황령산 자락에 위치한 캠퍼스는 울창한 수목과 맑은 공기, 약수터 등 아름다운 자연환경을 자랑합니다. 천연기념물 제267호인 구상반려암(약 6천만 년 전 형성)도 만날 수 있습니다.</p>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- 포트폴리오 페이지 -->
-        <section id="portfolio" class="page">
-            <div class="page-content">
-                <h1>포트폴리오 갤러리</h1>
-                
-                <div class="portfolio-gallery">
-                    <div class="portfolio-item">
-                        <div class="portfolio-img">ReRead</div>
-                        <div class="portfolio-overlay">
-                            <h4>중고 도서 거래 사이트</h4>
-                            <p>개인 간 거래 가능한 거래 사이트</p>
-                        </div>
+            <div class="facility-grid">
+                <div class="facility-item fade-in">
+                    <i class="fas fa-book facility-icon"></i>
+                    <h3 class="facility-name">디지털도서관</h3>
+                    <p class="facility-desc">최신 전자자료와 디지털 학습공간</p>
+                </div>
+                <div class="facility-item fade-in">
+                    <i class="fas fa-microscope facility-icon"></i>
+                    <h3 class="facility-name">첨단실습실</h3>
+                    <p class="facility-desc">산업현장과 동일한 최신 장비</p>
+                </div>
+                <div class="facility-item fade-in">
+                    <i class="fas fa-dumbbell facility-icon"></i>
+                    <h3 class="facility-name">종합체육관</h3>
+                    <p class="facility-desc">다목적 체육시설 및 운동공간</p>
+                </div>
+                <div class="facility-item fade-in">
+                    <i class="fas fa-utensils facility-icon"></i>
+                    <h3 class="facility-name">학생식당</h3>
+                    <p class="facility-desc">영양가 있고 저렴한 식사 제공</p>
+                </div>
+                <div class="facility-item fade-in">
+                    <i class="fas fa-bed facility-icon"></i>
+                    <h3 class="facility-name">황령생활관</h3>
+                    <p class="facility-desc">쾌적하고 안전한 기숙사 시설</p>
+                </div>
+                <div class="facility-item fade-in">
+                    <i class="fas fa-medkit facility-icon"></i>
+                    <h3 class="facility-name">보건센터</h3>
+                    <p class="facility-desc">학생 건강관리 및 응급처치</p>
+                </div>
+                <div class="facility-item fade-in">
+                    <i class="fas fa-wifi facility-icon"></i>
+                    <h3 class="facility-name">스마트캠퍼스</h3>
+                    <p class="facility-desc">전 캠퍼스 무료 WiFi 제공</p>
+                </div>
+                <div class="facility-item fade-in">
+                    <i class="fas fa-coffee facility-icon"></i>
+                    <h3 class="facility-name">석당문화관</h3>
+                    <p class="facility-desc">휴게공간 및 문화행사장</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in" style="color: white;">입학 정보</h2>
+            <p class="section-description fade-in" style="color: rgba(255,255,255,0.9);">
+                동의과학대학교와 함께할 미래의 전문인재를 기다립니다
+            </p>
+            
+            <!-- Admission Process -->
+            <div class="admission-process fade-in">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: white;">입학 전형 과정</h3>
+                <div class="process-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>원서접수</h4>
+                        <p>온라인 원서접수<br>필요서류 제출</p>
                     </div>
-
-                    <div class="portfolio-item">
-                        <div class="portfolio-img">분리배출 도움</div>
-                        <div class="portfolio-overlay">
-                            <h4>분리배출 앱</h4>
-                            <p>사용자에게 편리한 인터페이스</p>
-                        </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>전형실시</h4>
+                        <p>서류전형<br>면접전형</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>합격발표</h4>
+                        <p>홈페이지 공지<br>개별 통지</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <h4>등록</h4>
+                        <p>합격자 등록<br>입학식</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <div class="contact-item fade-in">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>캠퍼스 위치</h3>
+                    <p>부산광역시 부산진구 양지로 54번길 29</p>
+                    <small>지하철 1호선 양정역 4번 출구</small>
+                </div>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-phone"></i>
+                    <h3>입학 상담</h3>
+                    <p>051-860-3080</p>
+                    <small>평일 09:00~17:00</small>
+                </div>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-envelope"></i>
+                    <h3>입학처 이메일</h3>
+                    <p>ipsi@dit.ac.kr</p>
+                    <small>온라인 상담 가능</small>
+                </div>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-globe"></i>
+                    <h3>홈페이지</h3>
+                    <p>www.dit.ac.kr</p>
+                    <small>최신 입학정보 안내</small>
+                </div>
+            </div>
+
+            <!-- Scholarships -->
+            <div class="scholarships fade-in">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: white;">장학제도</h3>
+                <div class="scholarship-grid">
+                    <div class="scholarship-item">
+                        <i class="fas fa-trophy"></i>
+                        <h4>성적우수 장학금</h4>
+                        <p>입학성적 우수자 대상<br>학기별 성적우수자 지원</p>
+                    </div>
+                    <div class="scholarship-item">
+                        <i class="fas fa-heart"></i>
+                        <h4>가계곤란 장학금</h4>
+                        <p>경제적 어려움을 겪는<br>학생들을 위한 지원</p>
+                    </div>
+                    <div class="scholarship-item">
+                        <i class="fas fa-star"></i>
+                        <h4>특기자 장학금</h4>
+                        <p>특별한 재능과 기술을<br>가진 학생 지원</p>
+                    </div>
+                    <div class="scholarship-item">
+                        <i class="fas fa-briefcase"></i>
+                        <h4>산학협력 장학금</h4>
+                        <p>산업체 연계 프로그램<br>참여 학생 지원</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 동의과학대학교. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
-        // DOM 요소들 선택
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pages = document.querySelectorAll('.page');
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        const navOverlay = document.querySelector('.nav-overlay');
-
-        // 햄버거 메뉴 토글
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            
-            // 스크롤 방지/허용
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
-
-        // 오버레이 클릭 시 메뉴 닫기
-        navOverlay.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        // 페이지 네비게이션
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetPage = link.getAttribute('data-page');
-                
-                // 모든 링크와 페이지에서 active 클래스 제거
-                navLinks.forEach(l => l.classList.remove('active'));
-                pages.forEach(p => p.classList.remove('active'));
-                
-                // 클릭된 링크와 대상 페이지에 active 클래스 추가
-                link.classList.add('active');
-                document.getElementById(targetPage).classList.add('active');
-                
-                // 모바일 메뉴 닫기
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                navOverlay.classList.remove('active');
-                document.body.style.overflow = '';
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // ESC 키로 메뉴 닫기
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                navOverlay.classList.remove('active');
-                document.body.style.overflow = '';
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
         });
 
-        // 다운로드 레포트 기능
-        function downloadReport(reportType) {
-            const reports = {
-                'react18': 'React 18 신기능 분석 보고서',
-                'microservice': '마이크로서비스 아키텍처 연구',
-                'performance': '웹 성능 최적화 기법',
-                'aiml': 'AI/ML 웹 개발 적용 사례',
-                'security': '보안 취약점 분석 및 대응방안'
-            };
-            
-            alert(`${reports[reportType]} 다운로드를 시작합니다.`);
-            
-            // 실제 다운로드 로직
-            const element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(`${reports[reportType]} 내용입니다.`));
-            element.setAttribute('download', `${reportType}_report.txt`);
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for statistics
+        function animateCounter(element, target) {
+            const increment = target / 60;
+            let current = 0;
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.floor(current);
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 50);
         }
 
-        // 페이지 로드 시 애니메이션
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('[data-target]');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        animateCounter(counter, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
 
-            document.querySelectorAll('.project-card, .skill-item, .portfolio-item').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
 
-        // 미디어 요소 처리
-        document.querySelectorAll('video, audio').forEach(media => {
-            media.addEventListener('loadstart', () => {
-                console.log('미디어 로딩 시작');
+        // Theme toggle (placeholder functionality)
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            // This is a placeholder for theme toggle functionality
+            // You can implement dark/light theme switching here
+            console.log('Theme toggle clicked');
+        });
+
+        // Mobile menu toggle (placeholder)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            // Add mobile menu functionality here
+            console.log('Mobile menu clicked');
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.stat-card, .life-card, .facility-item').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
             });
             
-            media.addEventListener('error', (e) => {
-                console.log('미디어 로딩 오류:', e);
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
             });
         });
     </script>
